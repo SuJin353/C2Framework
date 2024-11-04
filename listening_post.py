@@ -1,7 +1,7 @@
 import json
 import resources
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask
 from flask_restful import Api
 from database.db import initialize_db
 
@@ -22,11 +22,6 @@ api = Api(app)
 # Define the routes for each of our resources
 api.add_resource(resources.Tasks, '/tasks', endpoint='tasks')
 
-@app.route('/')
-def welcome():
-    return render_template('welcome.html')
-
 # Start the Flask app in debug mode
 if __name__ == '__main__':
-    app.run(host="192.168.100.127", port=5000, debug=True)
-    
+    app.run(debug=True)
