@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # Configure our database on localhost
 app.config['MONGODB_SETTINGS'] = {
-    'host': 'mongodb://localhost/skytree'
+    'host': 'mongodb+srv://21521277:phu03052003@cluster0.qxkgg.mongodb.net/'
 }
 
 # Initialize our database
