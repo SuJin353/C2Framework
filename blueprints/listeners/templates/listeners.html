@@ -1,22 +1,26 @@
 {% extends 'layout.html' %}
-{% block content %}
 
-<h2>Payloads</h2>
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('listeners.static', filename='css/listeners.css') }}">
+<script src="{{url_for('listeners.static', filename='scripts/listeners.js')}}"></script>
+{% endblock%}
+
+{% block content %}
+<div class = "head">
+    <h2>Listeners</h2>
+    <button>Create</button>
+</div>
 <table>
     <thead>
-
         <tr>
             <th>Name</th>
-            <th>HOST</th>
-            <th>PORT</th>
-            <th>PID</th>
-            <th>Connect</th>
-            <th>Delete</th>
+            <th>Listener Type</th>
+            <th>Status</th>
+            <th>Start Time</th>
+            <th>Connect Address</th>
+            <th>Connect Port</th>
         </tr>
-
-
     </thead>
-
     <tbody>
         {% for listener in listeners %}
         <tr>
