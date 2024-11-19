@@ -19,9 +19,12 @@ table th, table td {
 }
 
 button {
-    background-color: #5a85ff;
-    border: none;
+    background-color: #121212;
     color: white;
-    padding: 5px 10px;    
+    font-weight: bold;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #5a85ff;
+    border-radius: 4px;
     cursor: pointer;
 }

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, request
+from .create_listener import CreateListener
 
 listeners_bp = Blueprint('listeners', __name__, template_folder='templates', static_folder='static')
 
@@ -8,5 +9,8 @@ def listeners():
 
 @listeners_bp.route('/create')
 def create_listener():
-    return render_template('create_listener.html')
+    form = CreateListener()
+    return render_template('create_listener.html', form = form)
 
+
+   

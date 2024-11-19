@@ -4,6 +4,9 @@ from blueprints.dashboard.dashboard import dashboard_bp
 
 # initialize our flask app
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = 'secret'
+
 # registering blueprints
 app.register_blueprint(listeners_bp, url_prefix='/listeners')
 app.register_blueprint(dashboard_bp, url_prefix='/dashboard')
