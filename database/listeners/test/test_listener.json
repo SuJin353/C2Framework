@@ -1,0 +1,1 @@
+{"name": "test", "type": "HTTP", "bind_address": "0.0.0.0", "bind_port": "80"}

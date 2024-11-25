@@ -13,8 +13,12 @@
         <div class="sidebar">
             <h1><a href="{{ url_for('dashboard.dashboard') }}" class="no-link-style">Comet</a></h1>            
             <ul>
-                <li class="{{ 'active' if request.endpoint == 'dashboard.dashboard' else '' }}"><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li> 
-                <li class="{{ 'active' if request.endpoint == 'listeners.listeners' else '' }}"><a href="{{ url_for('listeners.listeners') }}">Listeners</a></li>
+                <li class="{{ 'active' if request.endpoint.startswith('dashboard') else '' }}">
+                    <a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
+                </li> 
+                <li class="{{ 'active' if request.endpoint.startswith('listeners') else '' }}">
+                    <a href="{{ url_for('listeners.listeners') }}">Listeners</a>
+                </li>
             </ul>
         </div>
         <div class="content">

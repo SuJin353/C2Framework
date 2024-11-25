@@ -2,13 +2,12 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('listeners.static', filename='css/listeners.css') }}">
-<script src="{{url_for('listeners.static', filename='scripts/listeners.js')}}"></script>
 {% endblock%}
 
 {% block content %}
 <div class = "head">
     <h2>Listeners</h2>
-    <button>Create</button>
+    <button><a href="{{ url_for('listeners.create_listener') }}">Create</a></button>   
 </div>
 <table>
     <thead>
@@ -17,26 +16,24 @@
             <th>Listener Type</th>
             <th>Status</th>
             <th>Start Time</th>
-            <th>Connect Address</th>
-            <th>Connect Port</th>
+            <th>Bind Address</th>
+            <th>Bind Port</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
         {% for listener in listeners %}
         <tr>
+            <td>{{listener[0]}}</td>
             <td>{{listener[1]}}</td>
             <td>{{listener[2]}}</td>
             <td>{{listener[3]}}</td>
             <td>{{listener[4]}}</td>
             <td>{{listener[5]}}</td>
-            <td>{{listener[6]}}</td>
             <td>
                 <button type="submit">Connect</button>
-            </td>
-            <td>
                 <button type="submit">Delete</button>
             </td>
-           
         </tr>
         {% endfor %}
     </tbody>
