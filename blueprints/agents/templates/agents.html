@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('agents.static', filename='css/agents.css') }}">
+{% endblock%}
+
+{% block content %}
+<div class = "head">
+    <h2>Agents</h2>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Listener</th>
+            <th>Status</th>
+            <th>Remote Address</th>
+            <th>Remote Port</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for agent in agents %}
+        <tr>
+            <td>{{agent[0]}}</td>
+            <td>{{agent[1]}}</td>
+            <td>{{agent[2]}}</td>
+            <td>{{agent[3]}}</td>
+            <td>{{agent[4]}}</td>
+            <td>
+                <form action="{{ url_for('agents.agents') }}" method="POST" style="display: flex; justify-content: space-between">
+                    <input type="hidden" name="listener_name" value="{{ listener[0] }}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+
+{% endblock %}

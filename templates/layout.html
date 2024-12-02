@@ -19,11 +19,14 @@
                 <li class="{{ 'active' if request.endpoint.startswith('listeners') else '' }}">
                     <a href="{{ url_for('listeners.listeners') }}">Listeners</a>
                 </li>
+                <li class="{{ 'active' if request.endpoint.startswith('agents') else '' }}">
+                    <a href="{{ url_for('agents.agents') }}">Agents</a>
+                </li>
             </ul>
         </div>
         <div class="content">
           {% block content %}{% endblock %}
-        </div>
+        </div>1
     </div>
 </body>
 </html>

@@ -1,1 +1,1 @@
-{"name": "test", "type": "HTTP", "bind_address": "0.0.0.0", "bind_port": "80"}
+{"name": "test", "type": "HTTP", "bind_address": "192.168.100.127", "bind_port": "80"}

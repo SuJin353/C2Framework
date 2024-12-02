@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, validators
 
 
-class CreateListener(FlaskForm):
+class EditListener(FlaskForm):
     name = StringField('Name', [validators.DataRequired()])
 
     type = StringField('Type', default='HTTP')
@@ -11,6 +11,6 @@ class CreateListener(FlaskForm):
     
     bind_port = StringField('Bind Port', default='80')
 
-    submit = SubmitField('Create') 
+    submit = SubmitField('Edit')
 
 
