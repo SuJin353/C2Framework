@@ -1,0 +1,35 @@
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form {
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+label {
+    font-weight: bold;
+}
+input[type="text"] {
+    background-color: #121212;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #5a85ff;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out;
+}
+
+input[type="submit"] {
+    background-color: #121212;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #5a85ff;
+    border-radius: 4px;
+    cursor: pointer;
+}

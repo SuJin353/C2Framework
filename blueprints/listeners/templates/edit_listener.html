@@ -5,29 +5,27 @@
 {% endblock%}
 
 {% block content %}
-<div>
-    <h2>Create Listener</h2>
-    <form action="{{ url_for('listeners.edit_listener') }}" method="POST" >
-        <h3>Listen on HTTP protocol</h3>
-        {{ form.name.label }}  
-        {{ form.name}}
+<h2>Create Listener</h2>
+<form action="{{ url_for('listeners.edit_listener') }}" method="POST" >
+    <h3>Listen on HTTP protocol</h3>
+    {{ form.name.label }}
+    {{ form.name}}
 
-        {{ form.type.label }}
-        {{ form.type(readonly=true)}}
-        <div class="form_container">
-           <div style="flex: 1; margin-right: 20px">
-                {{ form.bind_address.label }}
-                {{ form.bind_address }}
-            </div>
-            <div style="flex: 1">
-                {{ form.bind_port.label }}
-                {{ form.bind_port }} 
-            </div>
+    {{ form.type.label }}
+    {{ form.type(readonly=true)}}
+    <div class="form_container">
+       <div style="flex: 1; margin-right: 20px">
+            {{ form.bind_address.label }}
+            {{ form.bind_address }}
         </div>
+        <div style="flex: 1">
+            {{ form.bind_port.label }}
+            {{ form.bind_port }}
+        </div>
+    </div>
 
-        {{ form.submit() }}
-    </form>
-</div>
+    {{ form.submit() }}
+</form>
 {% endblock %}
 
 

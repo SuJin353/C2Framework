@@ -22,6 +22,9 @@
                 <li class="{{ 'active' if request.endpoint.startswith('agents') else '' }}">
                     <a href="{{ url_for('agents.agents') }}">Agents</a>
                 </li>
+                <li class="{{ 'active' if request.endpoint.startswith('payload') else '' }}">
+                    <a href="{{ url_for('payload.payload') }}">Payload</a>
+                </li>
             </ul>
         </div>
         <div class="content">

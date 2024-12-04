@@ -2,6 +2,7 @@ from flask import Flask, redirect, url_for
 from blueprints.listeners.listeners import *
 from blueprints.dashboard.dashboard import dashboard_bp
 from blueprints.agents.agents import agents_bp
+from blueprints.payload.payload import payload_bp
 
 import secrets
 import argparse
@@ -14,6 +15,7 @@ app.secret_key = foo
 app.register_blueprint(listeners_bp, url_prefix='/listeners')
 app.register_blueprint(dashboard_bp, url_prefix='/dashboard')
 app.register_blueprint(agents_bp, url_prefix='/agents')
+app.register_blueprint(payload_bp, url_prefix='/payload')
    
 @app.route('/')
 def index():

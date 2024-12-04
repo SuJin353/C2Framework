@@ -13,9 +13,9 @@
         <tr>
             <th>Name</th>
             <th>Listener</th>
-            <th>Status</th>
+            <th>Type</th>
             <th>Remote Address</th>
-            <th>Remote Port</th>
+            <th>Host Name</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -29,7 +29,7 @@
             <td>{{agent[4]}}</td>
             <td>
                 <form action="{{ url_for('agents.agents') }}" method="POST" style="display: flex; justify-content: space-between">
-                    <input type="hidden" name="listener_name" value="{{ listener[0] }}">
+
                     <button type="submit">Delete</button>
                 </form>
             </td>
