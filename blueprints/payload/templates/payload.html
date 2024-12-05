@@ -8,12 +8,25 @@
 <div class = "head">
     <h2>Payload</h2>
 </div>
-<form action="{{ url_for('payload.payload') }}" method="POST" >
-    {{ form.listener.label }}
-    {{ form.listener}}
-
-    {{ form.type.label }}
-    {{ form.type(readonly=true)}}
+<form action="{{ url_for('payload.payload') }}" method="POST">
+    <div class="form_container">
+        <div style="flex: 1; margin-right: 20px">
+            {{ form.name.label }}
+            {{ form.name}}
+        </div>
+        <div style="flex: 1; margin-right: 20px">
+           {{ form.listener.label }}
+           <select name="listener_select">
+                {% for listener in listeners %}
+                    <option value="{{ listener[0] }}">{{ listener[0] }} - {{ listener[2] }}</option>
+                {% endfor %}
+           </select>
+        </div>
+        <div style="flex: 1">
+            {{ form.type.label }}
+            {{ form.type(readonly=true)}}
+        </div>
+    </div>
 
     {{ form.submit() }}
 </form>

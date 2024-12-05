@@ -11,7 +11,7 @@ form {
 label {
     font-weight: bold;
 }
-input[type="text"] {
+input[type="text"], select {
     background-color: #121212;
     color: white;
     width: 100%;
@@ -23,6 +23,20 @@ input[type="text"] {
     transition: border-color 0.2s ease-in-out;
 }
 
+select option {
+    background-color: #121212;
+    color: white;
+}
+
+select:focus {
+    border-color: #3b6cfe;
+    outline: none;
+}
+
+.form_container {
+    display: flex;
+    justify-content: space-between;
+}
 input[type="submit"] {
     background-color: #121212;
     color: white;

@@ -39,9 +39,7 @@ def get_local_ip():
     hostname = socket.gethostname()
     ip = socket.gethostbyname(hostname)
     return ip
-
-@listeners_bp.route('/', methods=['GET', 'POST'])
-def listeners():
+def load_listeners():
     listeners = []
 
     # Load all listeners from the database directory
@@ -50,7 +48,7 @@ def listeners():
         for listener_name in os.listdir(listeners_directory):
             file_path = listeners_directory + listener_name + "/" + listener_name + "_listener.json"
             with open(file_path, 'r') as f:
-                data  = json.load(f)
+                data = json.load(f)
 
             listener = Listener(**data)
             if listener.bind_address == get_local_ip():
@@ -61,12 +59,16 @@ def listeners():
                 status = "Not running"
 
             listeners.append((listener.name,
-                                  listener.type,
-                                  status,
-                                  listener.bind_address,
-                                  listener.bind_port))
+                              listener.type,
+                              status,
+                              listener.bind_address,
+                              listener.bind_port))
+    return listeners
 
-    return render_template('listeners.html', listeners = listeners)
+@listeners_bp.route('/', methods=['GET', 'POST'])
+def listeners():
+    listener_list = load_listeners()
+    return render_template('listeners.html', listeners = listener_list)
 
 @listeners_bp.route('/edit', methods=['GET', 'POST'])
 def edit_listener():
