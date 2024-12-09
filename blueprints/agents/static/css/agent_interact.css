@@ -1,0 +1,10 @@
+.terminal {
+    background-color: #1b1b1b;
+    color: #00ff00;
+    padding: 15px;
+    border-radius: 5px;
+    height: auto;
+    overflow-y: auto;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 20px;
+ }

@@ -5,9 +5,8 @@
 {% endblock%}
 
 {% block content %}
-<div class = "head">
-    <h2>Agents</h2>
-</div>
+<h2>Agents</h2>
+
 <table>
     <thead>
         <tr>
@@ -22,22 +21,18 @@
     <tbody>
         {% for agent in agents %}
         <tr>
-            <td>{{agent[0]}}</td>
+            <td><a href="{{ url_for('agents.agent_info', agent=agent[0]) }}">{{agent[0]}}</a></td>
             <td>{{agent[1]}}</td>
             <td>{{agent[2]}}</td>
             <td>{{agent[3]}}</td>
             <td>{{agent[4]}}</td>
             <td>
                 <form action="{{ url_for('agents.agents') }}" method="POST" style="display: flex; justify-content: space-between">
-
                     <button type="submit">Delete</button>
                 </form>
             </td>
         </tr>
         {% endfor %}
     </tbody>
-
 </table>
-
-
 {% endblock %}

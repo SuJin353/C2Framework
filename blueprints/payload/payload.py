@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField,validators
-from ..listeners.listeners import load_listeners, Listener
+from ..listeners.listeners import load_listeners
 
 payload_bp = Blueprint('payload', __name__, template_folder='templates', static_folder='static')
 

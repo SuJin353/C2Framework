@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('agents.static', filename='css/agent_layout.css') }}">
+{% block agent_head %}
+{% endblock %}
+{% endblock%}
+
+{% block content %}
+<h2>Agent: {{ agent.name }}</h2>
+<div class="navbar">
+    <ul>
+        <li class="{{ 'active' if request.path.endswith('info') else '' }}">
+            <a href="{{ url_for('agents.agent_info', agent = agent.agent_name) }}">Info</a>
+        </li>
+        <li class="{{ 'active' if request.path.endswith('interact') else '' }}">
+            <a href="{{ url_for('agents.agent_interact', agent = agent.agent_name) }}">Interact</a>
+        </li>
+    </ul>
+</div>
+{% block agent_content %}{% endblock %}
+{% endblock %}

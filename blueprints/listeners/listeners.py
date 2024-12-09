@@ -13,25 +13,25 @@ listeners_bp = Blueprint('listeners', __name__, template_folder='templates', sta
 
 class Listener:
 
-    def __init__(self, name, type, bind_address, bind_port):
+    def __init__(self, listener_name, listener_type, bind_address, bind_port):
 
-        self.name = name
-        self.type = type
+        self.listener_name = listener_name
+        self.listener_type = listener_type
         self.bind_address = bind_address
         self.bind_port = bind_port
-        self.path = f"database/listeners/{self.name}/"
+        self.path = f"database/listeners/{self.listener_name}/"
         self.isRunning  = False
         self.app = Flask(__name__)
         os.makedirs(self.path, exist_ok=True)
 
     def save(self):
         data = {
-            'name': self.name,
-            'type': "HTTP",
+            'listener_name': self.listener_name,
+            'listener_type': "HTTP",
             'bind_address': self.bind_address,
             'bind_port': self.bind_port,
         }
-        filename = os.path.join(self.path, f"{self.name}_listener.json")
+        filename = os.path.join(self.path, f"{self.listener_name}_listener.json")
         with open(filename, 'w') as f:
             json.dump(data, f)
 
@@ -58,8 +58,8 @@ def load_listeners():
             else:
                 status = "Not running"
 
-            listeners.append((listener.name,
-                              listener.type,
+            listeners.append((listener.listener_name,
+                              listener.listener_type,
                               status,
                               listener.bind_address,
                               listener.bind_port))

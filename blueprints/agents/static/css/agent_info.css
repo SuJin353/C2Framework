@@ -5,7 +5,7 @@ form {
 label {
     font-weight: bold;
 }
-input[type="text"], select {
+input[type="text"] {
     background-color: #121212;
     color: white;
     width: 100%;
@@ -17,27 +17,8 @@ input[type="text"], select {
     transition: border-color 0.2s ease-in-out;
 }
 
-select option {
-    background-color: #121212;
-    color: white;
-}
-
-select:focus {
-    border-color: #3b6cfe;
-    outline: none;
-}
-
 .form_container {
     display: flex;
     justify-content: space-between;
 }
-input[type="submit"] {
-    background-color: #121212;
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #5a85ff;
-    border-radius: 4px;
-    cursor: pointer;
-}
+

@@ -1,4 +1,6 @@
 from flask import Flask, redirect, url_for
+from random import choice
+from string import ascii_uppercase
 from blueprints.listeners.listeners import *
 from blueprints.dashboard.dashboard import dashboard_bp
 from blueprints.agents.agents import agents_bp
@@ -30,13 +32,20 @@ def main():
     # Parse the arguments
     args = parser.parse_args()
 
-    name = "test_2"
-    bind_address = args.host
-    bind_port = args.port
-    listener = Listener(name, type, bind_address, bind_port)
-    listener.save()
+    listener_list = load_listeners()
+    listener_exists = False
+    for listener in listener_list:
+        if listener[3] == args.host and listener[4] == args.port:
+            listener_exists = True
+            break
+    if not listener_exists:
+        name = ''.join(choice(ascii_uppercase) for i in range(6))
+        bind_address = args.host
+        bind_port = args.port
+        listener = Listener(name, type, bind_address, bind_port)
+        listener.save()
 
-    app.run(host = bind_address, port = bind_port)
+    app.run(host=args.host, port=args.port)
 
 # Start the Flask app in debug mode
 if __name__ == '__main__':

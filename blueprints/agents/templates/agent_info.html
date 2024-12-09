@@ -1,0 +1,46 @@
+{% extends 'agent_layout.html' %}
+
+{% block agent_head %}
+<link rel="stylesheet" href="{{ url_for('agents.static', filename='css/agent_info.css') }}">
+{% endblock%}
+
+{% block agent_content %}
+<form method="GET" >
+    <div class="form_container">
+        <div style="flex: 1; margin-right: 20px">
+            {{ form.remote_address.label }}
+            {{ form.remote_address }}
+        </div>
+        <div style="flex: 1; margin-right: 20px">
+            {{ form.agent_type.label }}
+            {{ form.agent_type }}
+        </div>
+        <div style="flex: 1">
+            {{ form.hostname.label }}
+            {{ form.hostname }}
+        </div>
+    </div>
+    <div class="form_container">
+        <div style="flex: 1; margin-right: 20px">
+            {{ form.listener_name.label }}
+            {{ form.listener_name }}
+        </div>
+        <div style="flex: 1">
+            {{ form.listener_type.label }}
+            {{ form.listener_type }}
+        </div>
+    </div>
+    <div class="form_container">
+        <div style="flex: 1; margin-right: 20px">
+            {{ form.bind_address.label }}
+            {{ form.bind_address }}
+        </div>
+        <div style="flex: 1">
+            {{ form.bind_port.label }}
+            {{ form.bind_port }}
+        </div>
+    </div>
+    {{ form.sleep.label }}
+    {{ form.sleep }}
+</form>
+{% endblock %}
