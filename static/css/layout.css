@@ -42,8 +42,11 @@ body {
 }
 
 .content {
+    height: 100vh;
     flex: 1;
     padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
 }
 
 .no-link-style {

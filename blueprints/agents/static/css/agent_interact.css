@@ -3,8 +3,19 @@
     color: #00ff00;
     padding: 15px;
     border-radius: 5px;
-    height: auto;
+    flex: 1;
     overflow-y: auto;
     font-family: 'Courier New', Courier, monospace;
-    margin-top: 20px;
+    margin-bottom: 20px;
  }
+
+input[type="text"] {
+    background-color: #1b1b1b;
+    color: #00ff00;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #5a85ff;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out;
+}
